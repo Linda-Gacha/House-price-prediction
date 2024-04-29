@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prédiction De Prix De Maison</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <h1 class="titre-color">Predict Your Dream House Price</h1>
+    <img src="static/image.png" alt="LA CASA">
+    <span class="important-text">Fill This Features:</span>
+    </br>
+
+
+
+    <form action="{{ url_for('predict')}}" method="POST">
+      <div class="form-group">
+        <label for="bedrooms">Bedrooms:</label>
+        <input type="number" id="bedrooms" name="bedrooms" min="0" max="10" required>
+      </div>
+      <div class="form-group">
+        <label for="bathrooms">Bathrooms:</label>
+        <input type="number" id="bathrooms" name="bathrooms" step="0.5" min="0" max="10" required>
+      </div>
+      <div class="form-group">
+        <label for="sqft_living">Sqft_living:</label>
+        <input type="number" id="sqft_living" name="sqft_living" min="0" max="10000" required>
+      </div>
+      <div class="form-group">
+        <label for="sqft_lot">Sqft_lot:</label>
+        <input type="number" id="sqft_lot" name="sqft_lot" min="0" max="10000" required>
+      </div>
+      <div class="form-group">
+        <label for="floors">Floors:</label>
+        <input type="number" id="floors" name="floors" step="0.5" min="0" max="10" required>
+      </div>
+      <div class="form-group">
+        <label for="waterfront">Waterfront:</label>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary">
+            <input type="radio" name="waterfront" id="waterfront-non" value="0" required> No
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" name="waterfront" id="waterfront-oui" value="1" required> Yes
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="condition">House Condition:</label>
+        <select id="condition" name="condition" required>
+          <option value="">--Choose a state--</option>
+          <option value="1">1 (Mauvais)</option>
+          <option value="2">2 (Moyen)</option>
+          <option value="3">3 (Bon)</option>
+          <option value="4">4 (Très bon)</option>
+          <option value="5">5 (Excellent)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="yr_built">Yr_built:</label>
+        <input type="number" id="yr_built" name="yr_built" min="1933" max="2009" required>
+      </div>
+      <div class="bouton-container">
+        <button class="bouton-predire" type="submit">Predict</button>
+      </div>
+      <div class="form-group">
+
+ <h3 class="estimated-price">Estimated_Price</h3>
+        {% if prediction is not none %}
+            <p style="color:red;"> {{ prediction}}Dt </p>
+        {% endif %}
+       
+      
+        </div>
+      </form>
+    </body>
+    </html>
+
